@@ -1,0 +1,38 @@
+﻿@model IEnumerable<projeto_financeiro.Models.Pessoa.Planilha>
+
+
+<div asp-action="Copiar" class="row justify-content-center">
+   
+    <div class="row justify-content-center">
+        <table class="table table-success table-striped table-hover col-md-6">
+            <thead>
+                <tr>
+
+                    @*<th scope="col">
+                        NFE
+                    </th>*@
+                    <th scope="col">
+                        Chave NFE
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody >
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Documento)
+
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idnfe)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+           
+        </table>
+       
+    </div>
+</div>
