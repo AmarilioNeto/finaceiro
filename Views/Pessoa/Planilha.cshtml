@@ -1,38 +1,52 @@
 ﻿@model IEnumerable<projeto_financeiro.Models.Pessoa.Planilha>
 
+<p>
+    <a class="btn btn-primary" onclick="copyToClickBoard()" id="btn" >Copiar Chave</a>
+</p>
 
-<div asp-action="Copiar" class="row justify-content-center">
-   
-    <div class="row justify-content-center">
-        <table class="table table-success table-striped table-hover col-md-6">
-            <thead>
+<script>
+    function copyToClickBoard() {
+        var content = document.getElementById('documento').innerHTML;
+        navigator.clipboard.writeText(content)
+            .then(() => {
+                console.log("Copiado com sucesso para área de transferência.")
+            })
+            .catch(err => {
+                console.log('Something went wrong', err);
+            })
+        //document.execCommand('copy');
+        alert('Copiado com sucesso para área de transferência.');
+    }
+</script>
+
+<div class="row justify-content-center" lang="en">
+    <table class="table table-success table-striped table-hover col-md-6">
+        <thead>
+            <tr>
+
+                <th scope="col">
+                    NFE
+                </th>
+                <th scope="col">
+                    Chave NFE
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-
-                    @*<th scope="col">
-                        NFE
-                    </th>*@
-                    <th scope="col">
-                        Chave NFE
-                    </th>
-                    <th></th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Documento)
+                    </td>
+                    <td id="">
+                        @Html.DisplayFor(modelItem => item.idnfe)
+                    </td>
                 </tr>
-            </thead>
-            <tbody >
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Documento)
+            }
 
-                        </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.idnfe)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-           
-        </table>
-       
-    </div>
+        </tbody>
+    </table>
+    <textarea id="documento" class="invisible">@ViewData["dot"] </textarea>
 </div>
